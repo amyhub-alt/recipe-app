@@ -1,11 +1,28 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Recipe App Home</title>
+    <title>Welcome to My Recipe App</title>
 </head>
-<body>
-    <h1>Welcome to the Recipe App!</h1>
-    <p>Discover, save, and share your favorite recipes with the world.</p>
+<body style="text-align:center; font-family:sans-serif; background-color: #fafafa;">
+
+    <h1>Welcome to My Recipe App!</h1>
+
+    <p style="font-size: 18px; color: #555;">Discover easy, delicious recipes made for the home cook.</p>
+
+    <br>
+
+    <!-- Optional welcome image -->
+    <img src="{% static 'recipes/images/food_home.jpg' %}" alt="Welcome Image" width="600" style="border-radius: 10px;">
+
+    <br><br>
+
+    <!-- Button to view recipes -->
+    <a href="/recipes/list/" style="padding: 12px 24px; background-color: #ff7f50; color: white; text-decoration: none; border-radius: 6px; font-size: 16px;">
+        Browse Recipes
+    </a>
+
 </body>
 </html>

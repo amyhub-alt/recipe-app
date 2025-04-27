@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ object.name }}</title>
+</head>
+<body style="font-family:sans-serif; background-color:#fafafa; text-align: center;">
+
+    <h1>{{ object.name }}</h1>
+
+    {% if object.pic %}
+        <img src="{{ object.pic.url }}" alt="{{ object.name }}" width="300" style="border-radius: 10px;">
+    {% else %}
+        <p>No image available</p>
+    {% endif %}
+
+    <h3>Cooking Time: {{ object.cooking_time }} minutes</h3>
+
+    <h3>Ingredients:</h3>
+    <p>{{ object.ingredients }}</p>
+
+    <h3>Description:</h3>
+    <p>{{ object.description }}</p>
+
+    <h3>Difficulty:</h3>
+    <p>
+        {% if object.cooking_time <= 30 and object.ingredients|length <= 100 %}
+            Easy
+        {% elif object.cooking_time <= 60 %}
+            Medium
+        {% else %}
+            Hard
+        {% endif %}
+    </p>
+
+    <br>
+    <a href="{% url 'recipes:list' %}" style="color: #ff7f50;">Back to Recipes</a>
+
+</body>
+</html>
