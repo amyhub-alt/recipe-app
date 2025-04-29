@@ -5,12 +5,30 @@
     <meta charset="UTF-8">
     <title>Recipes List</title>
     <style>
+        /* Layout for the header (Logout + All Recipes) */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+
+        .logout-button {
+            padding: 8px 24px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             padding: 20px;
         }
+
         .recipe-card {
             background: white;
             border: 1px solid #ccc;
@@ -19,11 +37,13 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             text-align: center;
         }
+
         .recipe-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
         }
+
         .recipe-card h3 {
             padding: 10px;
             font-size: 20px;
@@ -33,8 +53,16 @@
 </head>
 <body style="font-family: sans-serif; background-color: #fafafa;">
 
-    <h1 style="text-align: center;">All Recipes</h1>
+    <!-- Header section: Logout button + Heading -->
+    <div class="header-container">
+        <a href="{% url 'logout' %}" class="logout-button">
+            Logout
+        </a>
 
+        <h1>All Recipes</h1>
+    </div>
+
+    <!-- Recipes Grid -->
     <div class="grid-container">
         {% for recipe in object_list %}
         <div class="recipe-card">
@@ -43,8 +71,11 @@
             {% else %}
                 <img src="{% static 'recipes/images/placeholder.jpg' %}" alt="No Image">
             {% endif %}
-            <h3><a href="{% url 'recipes:detail' recipe.pk %}" style="text-decoration:none; color:black;">{{ recipe.name }}</a></h3>
-
+            <h3>
+                <a href="{% url 'recipes:detail' recipe.pk %}" style="text-decoration:none; color:black;">
+                    {{ recipe.name }}
+                </a>
+            </h3>
         </div>
         {% endfor %}
     </div>
