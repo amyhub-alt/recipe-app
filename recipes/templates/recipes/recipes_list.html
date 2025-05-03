@@ -62,6 +62,49 @@
         <h1>All Recipes</h1>
     </div>
 
+<!-- Search Form -->
+<div style="padding: 0 40px;">
+    <form method="GET">
+        <label for="id_title">Recipe Title:</label>
+        {{ form.title }}
+
+        <label for="id_ingredient">Ingredient:</label>
+        {{ form.ingredient }}
+
+        <label for="id_chart_type">Chart Type:</label>
+        {{ form.chart_type }}
+
+        <br><br>
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+
+<!-- Show All Button -->
+<div style="padding: 0 40px; margin-top: 10px;">
+    <a href="{% url 'recipes:list' %}" style="text-decoration:none;">
+      <button type="button">Show All Recipes</button>
+    </a>
+  </div>
+  
+
+
+<hr>
+
+{% if table %}
+    <div style="padding: 0 40px;">
+        {{ table|safe }}
+    </div>
+{% endif %}
+
+{% if chart %}
+  <div style="padding: 0 40px; margin-top: 30px;">
+    <h3>Chart</h3>
+    <img src="data:image/png;base64,{{ chart }}" alt="Chart">
+  </div>
+{% endif %}
+
+
     <!-- Recipes Grid -->
     <div class="grid-container">
         {% for recipe in object_list %}
