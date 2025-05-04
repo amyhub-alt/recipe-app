@@ -33,17 +33,7 @@ DEBUG = os.getenv('DJANGO_DEBUG', '') != 'False'
 
 
 
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
-# Add this if deploying to Heroku
-if os.getenv("RENDER", False):  # Optional if using Render
-    ALLOWED_HOSTS += ['yourdomain.onrender.com']
-
-# Or if using Heroku:
-if os.getenv("HEROKU"):
-    ALLOWED_HOSTS += ['your-heroku-app-name.herokuapp.com']
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'amys-recipe-app-5e260cbf6236.herokuapp.com']
 
 
 
