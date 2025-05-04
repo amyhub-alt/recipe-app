@@ -1,34 +1,17 @@
+{% extends 'recipes/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome to My Recipe App</title>
-</head>
-<body style="text-align:center; font-family:sans-serif; background-color: #fafafa;">
+{% block title %}Welcome{% endblock %}
 
-    <h1>Welcome to My Recipe App!</h1>
-
-    <p style="font-size: 18px; color: #555;">Discover easy, delicious recipes made for the home cook.</p>
-
-    <br>
-
-    <!-- Optional welcome image -->
-    <img src="{% static 'recipes/images/food_home.jpg' %}" alt="Welcome Image" width="600" style="border-radius: 10px;">
-
-    <br><br>
-
-    <!-- Button to view recipes -->
-    <a href="/recipes/list/" style="padding: 12px 24px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 6px; font-size: 16px;">
-        Browse Recipes
-    </a>
-
-    <br><br>
-    <br><br>
-    <a href="{% url 'login' %}" style="padding: 10px 20px; background-color: #ff7f50; color: white; text-decoration: none; border-radius: 6px; font-size: 16px;">
-        Login
-    </a>
-
-</body>
-</html>
+{% block content %}
+<div style="text-align: center; padding: 40px;">
+  <h1 style="font-weight: bold;">Welcome to My Recipe App!</h1>
+  <p style="font-size: 18px; color: #555;">Discover easy, delicious recipes made for the home cook.</p>
+  <br>
+  <img src="{% static 'recipes/images/food_home.jpg' %}" alt="Welcome Image" width="600" style="border-radius: 10px; display: block; margin: 0 auto;">
+  <br><br>
+  <a href="{% url 'recipes:list' %}" style="background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+    Browse Recipes
+  </a>
+</div>
+{% endblock %}

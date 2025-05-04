@@ -1,4 +1,6 @@
 from django import forms
+from .models import Recipe
+
 
 CHART_CHOICES = (
     ('bar', 'Bar Chart'),
@@ -19,3 +21,9 @@ class RecipeSearchForm(forms.Form):
     )
 
     chart_type = forms.ChoiceField(choices=CHART_CHOICES, required=False)
+
+
+class RecipeForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ['name', 'ingredients', 'description', 'cooking_time', 'pic']

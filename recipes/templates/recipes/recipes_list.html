@@ -1,120 +1,47 @@
+{% extends 'recipes/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Recipes List</title>
-    <style>
-        /* Layout for the header (Logout + All Recipes) */
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-        }
 
-        .logout-button {
-            padding: 8px 24px;
-            background-color: #f44336;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 16px;
-        }
+{% block title %}All Recipes{% endblock %}
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .recipe-card {
-            background: white;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .recipe-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .recipe-card h3 {
-            padding: 10px;
-            font-size: 20px;
-            color: #333;
-        }
-    </style>
-</head>
-<body style="font-family: sans-serif; background-color: #fafafa;">
-
-    <!-- Header section: Logout button + Heading -->
-    <div class="header-container">
-        <a href="{% url 'logout' %}" class="logout-button">
-            Logout
-        </a>
-
-        <h1>All Recipes</h1>
-    </div>
+{% block content %}
+    <h1>All Recipes</h1>
 
 <!-- Search Form -->
-<div style="padding: 0 40px;">
-    <form method="GET">
-        <label for="id_title">Recipe Title:</label>
-        {{ form.title }}
-
-        <label for="id_ingredient">Ingredient:</label>
-        {{ form.ingredient }}
-
-        <label for="id_chart_type">Chart Type:</label>
-        {{ form.chart_type }}
-
-        <br><br>
-        <button type="submit">Search</button>
+<div style="padding: 0 40px; margin-bottom: 20px;">
+    <form method="GET" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center;">
+      <label for="id_title" style="font-weight: bold;">Recipe Title:</label>
+      <input type="text" name="title" id="id_title" value="{{ request.GET.title }}" placeholder="e.g., Banana" style="padding: 10px; font-size: 16px; width: 200px; border: 1px solid #ccc; border-radius: 4px;">
+  
+      <label for="id_ingredient" style="font-weight: bold;">Ingredient:</label>
+      <input type="text" name="ingredient" id="id_ingredient" value="{{ request.GET.ingredient }}" placeholder="e.g., Egg" style="padding: 10px; font-size: 16px; width: 200px; border: 1px solid #ccc; border-radius: 4px;">
+  
+      <button type="submit" style="padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 6px;">
+        Search
+      </button>
     </form>
-</div>
-
-
-<!-- Show All Button -->
-<div style="padding: 0 40px; margin-top: 10px;">
-    <a href="{% url 'recipes:list' %}" style="text-decoration:none;">
-      <button type="button">Show All Recipes</button>
-    </a>
+  
+    <div style="margin-top: 10px;">
+      <a href="{% url 'recipes:list' %}" style="text-decoration: none;">
+        <button type="button" style="padding: 10px 20px; font-size: 16px; background-color: #555; color: white; border: none; border-radius: 6px;">
+          Show All Recipes
+        </button>
+      </a>
+    </div>
   </div>
   
 
-
-<hr>
-
-{% if table %}
-    <div style="padding: 0 40px;">
-        {{ table|safe }}
-    </div>
-{% endif %}
-
-{% if chart %}
-  <div style="padding: 0 40px; margin-top: 30px;">
-    <h3>Chart</h3>
-    <img src="data:image/png;base64,{{ chart }}" alt="Chart">
-  </div>
-{% endif %}
-
+    <hr>
 
     <!-- Recipes Grid -->
-    <div class="grid-container">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px;">
         {% for recipe in object_list %}
-        <div class="recipe-card">
+        <div style="background: white; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
             {% if recipe.pic %}
-                <img src="{{ recipe.pic.url }}" alt="{{ recipe.name }}">
+                <img src="{{ recipe.pic.url }}" alt="{{ recipe.name }}" style="width: 100%; height: 200px; object-fit: cover;">
             {% else %}
-                <img src="{% static 'recipes/images/placeholder.jpg' %}" alt="No Image">
+                <img src="{% static 'recipes/images/placeholder.jpg' %}" alt="No Image" style="width: 100%; height: 200px; object-fit: cover;">
             {% endif %}
-            <h3>
+            <h3 style="padding: 10px;">
                 <a href="{% url 'recipes:detail' recipe.pk %}" style="text-decoration:none; color:black;">
                     {{ recipe.name }}
                 </a>
@@ -122,6 +49,4 @@
         </div>
         {% endfor %}
     </div>
-
-</body>
-</html>
+{% endblock %}

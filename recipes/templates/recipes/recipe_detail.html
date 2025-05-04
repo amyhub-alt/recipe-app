@@ -1,11 +1,10 @@
+{% extends 'recipes/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ object.name }}</title>
-</head>
-<body style="font-family:sans-serif; background-color:#fafafa; text-align: center;">
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+<div style="text-align: center; font-family: sans-serif;">
 
     <h1>{{ object.name }}</h1>
 
@@ -35,7 +34,19 @@
     </p>
 
     <br>
-    <a href="{% url 'recipes:list' %}" style="color: #ff7f50;">Back to Recipes</a>
+    <a href="{% url 'recipes:list' %}" style="padding: 10px 20px; background-color: #4CAFEE; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">
+        Back to Recipes
+    </a>
+    
 
-</body>
-</html>
+    {% if user.is_authenticated %}
+        <form action="{% url 'recipes:delete' object.pk %}" method="post" style="margin-top: 20px;">
+            {% csrf_token %}
+            <button type="submit" style="padding: 10px 20px; background-color: #f44336; color: white; border: none; border-radius: 5px;">
+                Delete Recipe
+            </button>
+        </form>
+    {% endif %}
+
+</div>
+{% endblock %}

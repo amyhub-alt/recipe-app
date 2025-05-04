@@ -1,0 +1,33 @@
+{% extends 'recipes/base.html' %}
+{% load static %}
+
+{% block title %}Add Recipe{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+    <h1 style="text-align: center; color: #333;">Add a New Recipe</h1>
+
+    <form method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 15px;">
+        {% csrf_token %}
+        
+        <label for="id_name" style="font-weight: bold;">Name:</label>
+        {{ form.name }}
+        
+        <label for="id_ingredients" style="font-weight: bold;">Ingredients: <span style="font-weight: normal; font-size: 13px;">(comma-separated)</span></label>
+        {{ form.ingredients }}
+
+        <label for="id_description" style="font-weight: bold;">Description:</label>
+        {{ form.description }}
+
+        <label for="id_cooking_time" style="font-weight: bold;">Cooking Time (in minutes):</label>
+        {{ form.cooking_time }}
+
+        <label for="id_pic" style="font-weight: bold;">Picture:</label>
+        {{ form.pic }}
+
+        <button type="submit" style="padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px;">
+            Submit
+        </button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'recipes/base.html' %}
+{% load static %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block content %}
+<div style="max-width: 900px; margin: 0 auto; padding: 40px;">
+    <h2>Recipe Data Insights</h2>
+
+    <form method="GET" style="display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-end;">
+        <div>
+            <label><strong>Recipe Title:</strong></label><br>
+            {{ form.title }}
+        </div>
+
+        <div>
+            <label><strong>Ingredient:</strong></label><br>
+            {{ form.ingredient }}
+        </div>
+
+        <div>
+            <label><strong>Chart type:</strong></label><br>
+            {{ form.chart_type }}
+        </div>
+
+        <div>
+            <button type="submit" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 6px;">
+                Generate Chart
+            </button>
+        </div>
+    </form>
+
+    <br>
+
+    {% if table %}
+        <div style="margin-top: 30px;">
+            {{ table|safe }}
+        </div>
+    {% endif %}
+
+    {% if chart %}
+        <div style="margin-top: 30px;">
+            <h3>Chart</h3>
+            <img src="data:image/png;base64,{{ chart }}" alt="Chart">
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

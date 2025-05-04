@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Recipe App{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body style="font-family: sans-serif; background-color: #fafafa;">
+
+    <nav style="background-color: #fff; padding: 15px 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <a href="{% url 'recipes:home' %}" style="margin-right: 20px;">Home</a>
+            <a href="{% url 'recipes:list' %}" style="margin-right: 20px;">All Recipes</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'recipes:add' %}" style="margin-right: 20px;">Add Recipe</a>
+            {% endif %}
+            <a href="{% url 'recipes:about' %}" style="margin-right: 20px;">About Me</a>
+            <a href="{% url 'recipes:analytics' %}" style="margin-right: 20px;">Analytics</a>
+        
+        </div>
+        <div>
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background-color:#f44336; color:white; padding:6px 12px; border:none; border-radius:5px;">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" style="background-color:#4CAF50; color:white; padding:6px 12px; text-decoration:none; border-radius:5px;">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div style="padding: 40px;">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>

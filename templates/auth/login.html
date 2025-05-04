@@ -1,11 +1,27 @@
-<h1>Login</h1>
+{% extends 'recipes/base.html' %}
 
-{% if error_message %}
-    <p style="color:red;">{{ error_message }}</p>
-{% endif %}
+{% block title %}Login{% endblock %}
 
-<form action="" method="POST">
+{% block content %}
+<div style="max-width: 400px; margin: 60px auto; padding: 30px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+  <h2 style="text-align: center; margin-bottom: 25px;">Login</h2>
+
+  {% if error_message %}
+    <p style="color:red; text-align: center;">{{ error_message }}</p>
+  {% endif %}
+
+  <form method="POST">
     {% csrf_token %}
-    {{ form }}
-    <button type="submit">Login</button>
-</form>
+    
+    <label for="id_username" style="font-weight: bold;">Username:</label><br>
+    <input type="text" name="username" id="id_username" class="form-input" style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
+
+    <label for="id_password" style="font-weight: bold;">Password:</label><br>
+    <input type="password" name="password" id="id_password" class="form-input" style="width: 100%; padding: 8px; margin-bottom: 20px;"><br>
+
+    <button type="submit" style="width: 100%; padding: 10px; background-color: #4CAF50; color: white; font-weight: bold; border: none; border-radius: 4px;">
+      Login
+    </button>
+  </form>
+</div>
+{% endblock %}
