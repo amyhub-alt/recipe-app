@@ -3,6 +3,3 @@ __pycache__/
 *.sqlite3
 *.bak
 .env
-
-# Ignore Django settings
-*/settings.py
